@@ -78,9 +78,15 @@ void Giveaway_App::version() const
 
 void Giveaway_App::display_winner(const std::string& winner) const
 {
-    for (int i = 0; i < 100; ++i)
+    for (int i = 0; i < 15; ++i)
     {
         std::cout << '\n';
+    }
+
+    std::cout << "\nThe contestants were: " << std::endl;
+    for (auto contestant : contestants)
+    {
+        std::cout << contestant << std::endl;
     }
 
     std::cout << "\nCONGRATULATIONS!! " << winner << " WINS!!!";
