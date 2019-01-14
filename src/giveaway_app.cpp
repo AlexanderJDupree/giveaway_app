@@ -8,14 +8,17 @@ Author: Alexander DuPree
 Date: 1/13/2019
 */
 
+#include <random>
+#include <chrono>
 #include "giveaway_app.h"
 
 using namespace clara;
 
 /****** Static Definitions ******/
 
-static bool Giveaway_App::show_help = false;
-static Giveaway_App::Contestants Giveaway_App::contestants = Contestants();
+bool Giveaway_App::show_help = false;
+bool Giveaway_App::version_request = false;
+Giveaway_App::Contestants Giveaway_App::contestants = Contestants();
 
 const Parser Giveaway_App::parser = 
          Opt(version_request)
@@ -51,8 +54,7 @@ int Giveaway_App::run() const
     }
     else
     {
-        std::cout << contestants << std::endl;
-        //display_temp_conversion();
+        display_winner(select_winner());
     }
     return 0;
 }
@@ -72,5 +74,47 @@ void Giveaway_App::version() const
 {
     std::cout << GIVEAWAY_VERSION << std::endl;
     return;
+}
+
+void Giveaway_App::display_winner(const std::string& winner) const
+{
+    for (int i = 0; i < 100; ++i)
+    {
+        std::cout << '\n';
+    }
+
+    std::cout << "\nCONGRATULATIONS!! " << winner << " WINS!!!";
+
+    for (int i = 0; i < 10; ++i)
+    {
+        std::cout << '\n';
+    }
+    return;
+}
+
+const std::string& Giveaway_App::select_winner() const
+{
+    int winner = rand_index();
+    for (const std::string& contestant : contestants)
+    {
+        if(winner-- <= 0)
+        {
+            return contestant;
+        }
+    }
+    throw "Unable to select winner";
+}
+
+int Giveaway_App::rand_index() const 
+{
+    std::mt19937 generator(get_seed());
+    std::uniform_int_distribution<int> u_dist(0, contestants.size() - 1);
+
+    return u_dist(generator);
+}
+
+long long Giveaway_App::get_seed() const
+{
+    return std::chrono::high_resolution_clock::now().time_since_epoch().count();
 }
 

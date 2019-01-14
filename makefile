@@ -11,7 +11,7 @@ OBJ_DIR := obj
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 APPLICATION := giveaway.cpp
-TARGET := obj/debug/ftoc
+TARGET := obj/debug/giveaway
 
 TEST_DIR := tests
 TEST_OBJ := tests/obj

@@ -1,6 +1,6 @@
-/* File: ftoc.cpp
+/* File: giveaway.cpp
  *
- * Brief: Command-Line applcation that converts temperatures to specified units
+ * Brief: Command-Line applcation that selects a winner from a list of contestants
  *
  * Author: Alexander DuPree
  *
@@ -14,13 +14,18 @@ int main(int argc, char ** argv)
     int return_code = 0;
     try
     {
-        Converter_App app(argc, argv);
+        Giveaway_App app(argc, argv);
 
         return_code = app.run();
     }
     catch(const clara::detail::InternalParseResult& err)
     {
         std::cerr << "Parser Error: " << err.errorMessage() << std::endl;
+        return_code = 1;
+    }
+    catch(const char* err)
+    {
+        std::cerr << err << std::endl;
         return_code = 1;
     }
     
