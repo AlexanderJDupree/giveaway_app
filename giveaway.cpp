@@ -7,7 +7,7 @@
  * Date: 1/9/2019
 */
 
-#include "converter_app.h"
+#include "giveaway_app.h"
 
 int main(int argc, char ** argv) 
 {
@@ -23,11 +23,7 @@ int main(int argc, char ** argv)
         std::cerr << "Parser Error: " << err.errorMessage() << std::endl;
         return_code = 1;
     }
-    catch(const unknown_units& err)
-    {
-        std::cerr << err.what() << std::endl;
-        return_code = 1;
-    }
+    
     return return_code;
 }
 
