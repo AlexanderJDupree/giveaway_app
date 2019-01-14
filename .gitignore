@@ -1,0 +1,19 @@
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Swap files
+*.swp
+
+# Executables
+obj/debug/ftoc
+tests/obj/debug/run_tests
+
